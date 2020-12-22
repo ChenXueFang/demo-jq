@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+    var arr = [
+
+      {
+          path:"root\\a",
+          hashCode: "57EBCFFEE674054BD86D47213C053894DC54BAE94AF308FCA0064AF5904DA9E4",
+          ksiState: null,
+          operationEvent: 2,
+      },
+       {
+           path:"root\\a\\new_b.png",
+           hashCode: "57EBCFFEE674054BD86D47213C053894DC54BAE94AF308FCA0064AF5904DA9E4",
+           ksiState: null,
+           operationEvent: 2,
+       },
+       {
+           path:"root\\a\\qa",
+           hashCode: "57EBCFFEE674054BD86D47213C053894DC54BAE94AF308FCA0064AF5904DA9E4",
+           ksiState: null,
+           operationEvent: 2,
+       },
+        {
+            path:"root\\b",
+            hashCode: "57EBCFFEE674054BD86D47213C053894DC54BAE94AF308FCA0064AF5904DA9E4",
+            ksiState: null,
+            operationEvent: 2,
+        },
+        {
+            path:"root\\b\\ys",
+            hashCode: "57EBCFFEE674054BD86D47213C053894DC54BAE94AF308FCA0064AF5904DA9E4",
+            ksiState: null,
+            operationEvent: 2,
+        },
+        {
+            path:"root\\b\\vbdd",
+            hashCode: "57EBCFFEE674054BD86D47213C053894DC54BAE94AF308FCA0064AF5904DA9E4",
+            ksiState: null,
+            operationEvent: 2,
+        },
+
+    ];
+
+    const pathToTree = input => {
+        var output = [];
+        for (var i = 0; i < input.length; i++) {
+            var chain = input[i].path.split("\\");
+            var currentNode = output;
+            for (var j = 0; j < chain.length; j++) {
+                if (chain[j] === "") {
+                    break;
+                }
+                var wantedNode = chain[j];
+                var lastNode = currentNode;
+                for (var k = 0; k < currentNode.length; k++) {
+                    if (currentNode[k].title == wantedNode) {
+                        currentNode = currentNode[k].children;
+                        break;
+                    }
+                }
+                if (wantedNode.indexOf(".") == -1) {
+                    if (lastNode == currentNode) {
+                        var newNode = (currentNode[k] = {
+                            key: input[i],
+                            title: wantedNode,
+                            children: []
+                        });
+                        currentNode = newNode.children;
+                    } else {
+                        delete currentNode.children;
+                    }
+                }
+            }
+        }
+        return output;
+    };
+    console.log(pathToTree(arr));
+</script>
+</body>
+</html>
